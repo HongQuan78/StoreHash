@@ -51,9 +51,16 @@ app.post('/api/hash', (req, res) => {
 // Route to get a single hash by classId
 app.get('/api/hash/:classId', (req, res) => {
     Hash.findOne({ classId: req.params.classId })
-        .then(hash => res.send(hash))
+        .then(hash => {
+            if (!hash) {
+                res.send([]); // Return an empty array if no hash is found
+            } else {
+                res.send(hash); // Send the found hash
+            }
+        })
         .catch(err => res.status(400).send(err));
 });
+
 
 // Route to get all hashes
 app.get('/api/hash', (req, res) => {
