@@ -1,5 +1,4 @@
-// mongodb+srv://tranbanam33:6wGcZnBpO8nyWMCY@bchainlms.hobpplr.mongodb.net/?retryWrites=true&w=majority&appName=BChainLMS
-
+require('dotenv').config(); // Load environment variables from .env file
 const express = require('express');
 const mongoose = require('mongoose');
 const app = express();
@@ -7,7 +6,7 @@ const app = express();
 app.use(express.json());
 
 // MongoDB connection
-const mongoURI = 'mongodb+srv://tranbanam33:6wGcZnBpO8nyWMCY@bchainlms.hobpplr.mongodb.net/?retryWrites=true&w=majority&appName=BChainLMS';
+const mongoURI = process.env.MONGO_URI; // Use the environment variable for the connection string
 mongoose.connect(mongoURI, { useNewUrlParser: true, useUnifiedTopology: true })
     .then(() => console.log('MongoDB connected'))
     .catch(err => console.log(err));
@@ -38,6 +37,7 @@ app.get('/api/hash', (req, res) => {
         .then(hash => res.send(hash))
         .catch(err => res.status(400).send(err));
 });
+
 // Start the server
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
