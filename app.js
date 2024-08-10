@@ -32,6 +32,12 @@ app.post('/api/hash', (req, res) => {
         .catch(err => res.status(400).send(err));
 });
 
+app.get('/api/hash/:classId', (req, res) => {
+    Hash.findOne({ classId: req.params.classId })
+        .then(hash => res.send(hash))
+        .catch(err => res.status(400).send(err));
+});
+
 app.get('/api/hash', (req, res) => {
     Hash.find()
         .then(hash => res.send(hash))
