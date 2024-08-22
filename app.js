@@ -8,7 +8,7 @@ const app = express();
 const corsOptions = {
     origin: function (origin, callback) {
         // List of allowed origins
-        const allowedOrigins = ['http://localhost:3000', 'https://crud.live'];
+        const allowedOrigins = ['http://localhost:3000', 'https://crud.live', 'https://admin.crud.live'];
         if (!origin || allowedOrigins.indexOf(origin) !== -1) {
             callback(null, true); // Allow CORS for this request
         } else {
